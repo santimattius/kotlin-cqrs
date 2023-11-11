@@ -1,0 +1,8 @@
+# Project exclude paths
+/.gradle/
+/build/
+.idea/misc.xml
+.idea/kotlinc.xml
+.idea/gradle.xml
+.idea/codeStyles/Project.xml
+.idea/codeStyles/codeStyleConfig.xml
