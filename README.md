@@ -1,9 +1,9 @@
 [![codecov](https://codecov.io/gh/santimattius/kotlin-hexagonal-architecture/branch/master/graph/badge.svg?token=BCIWKUK8RN)](https://codecov.io/gh/santimattius/kotlin-hexagonal-architecture) ![Quality Checks](https://github.com/santimattius/kotlin-hexagonal-architecture/actions/workflows/action.yml/badge.svg)
 
-# kotlin-hexagonal-architecture
+# kotlin-cqrs
 
 
-Example project applying hexagonal architecture in kotlin.
+Example project applying hexagonal architecture and CQRS in kotlin.
 
 <p align="center">
   <img width="500" src="https://github.com/santimattius/kotlin-hexagonal-architecture/blob/master/images/arch_hexa.png?raw=true" alt="Layers"/>
