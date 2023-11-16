@@ -40,6 +40,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     // Koin for Ktor
     implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("org.reflections:reflections:0.10.2")
 
     testImplementation("junit:junit:$junitVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
@@ -50,6 +51,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
+
 }
 
 java {

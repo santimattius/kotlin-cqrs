@@ -1,1 +1,1 @@
-rootProject.name = "kotlin-hexagonal-architecture"
+rootProject.name = "kotlin-cqrs"
