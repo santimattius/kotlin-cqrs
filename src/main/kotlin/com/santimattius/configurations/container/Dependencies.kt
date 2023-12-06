@@ -6,16 +6,23 @@ import com.santimattius.module.notification.domain.Notifier
 import com.santimattius.module.notification.infrastructure.NotificationPostController
 import com.santimattius.module.notification.infrastructure.SlackNotifier
 import com.santimattius.module.product.application.ProductCatalog
-import com.santimattius.module.product.application.ProductSearcher
 import com.santimattius.module.product.application.ProductUpdater
 import com.santimattius.module.product.application.create.CreateProductCommandHandler
 import com.santimattius.module.product.application.create.ProductCreator
+import com.santimattius.module.product.application.search.ProductSearchQueryHandler
+import com.santimattius.module.product.application.search.ProductSearcher
 import com.santimattius.module.product.domain.ProductRepository
 import com.santimattius.module.product.domain.ProductSearchService
 import com.santimattius.module.product.infrastructure.controllers.ProductGetController
 import com.santimattius.module.product.infrastructure.controllers.ProductPostController
 import com.santimattius.module.product.infrastructure.controllers.ProductPutController
 import com.santimattius.module.product.infrastructure.repositories.InMemoryProductRepository
+import com.santimattius.module.shared.domain.command.CommandBus
+import com.santimattius.module.shared.domain.query.QueryBus
+import com.santimattius.module.shared.infrastructure.command.CommandHandlersInformation
+import com.santimattius.module.shared.infrastructure.command.InMemoryCommandBus
+import com.santimattius.module.shared.infrastructure.query.InMemoryQueryBus
+import com.santimattius.module.shared.infrastructure.query.QueryHandlersInformation
 import org.koin.dsl.module
 
 private val application = module {
@@ -28,6 +35,7 @@ private val application = module {
     //Notification UseCases
     factory { NotificationSender(notifier = get<Notifier>()) }
     factory { CreateProductCommandHandler(get()) }
+    factory { ProductSearchQueryHandler(get()) }
 }
 
 private val domain = module {
@@ -39,11 +47,10 @@ private val infrastructure = module {
     single<ProductRepository> { InMemoryProductRepository() }
     factory {
         ProductGetController(
-            productSearcher = get<ProductSearcher>(),
             productCatalog = get<ProductCatalog>()
         )
     }
-    factory { ProductPostController(get()) }
+    factory { ProductPostController() }
     factory { ProductPutController(productUpdater = get<ProductUpdater>()) }
 
     //Notification
@@ -54,4 +61,11 @@ private val infrastructure = module {
     factory { HealthCheckController() }
 }
 
-val dependencies = listOf(application, domain, infrastructure)
+private val cqrs = module(createdAtStart = true) {
+    single { CommandHandlersInformation() }
+    single { QueryHandlersInformation() }
+    single<CommandBus> { InMemoryCommandBus(get()) }
+    single<QueryBus> { InMemoryQueryBus(get()) }
+}
+
+val dependencies = listOf(cqrs, application, domain, infrastructure)

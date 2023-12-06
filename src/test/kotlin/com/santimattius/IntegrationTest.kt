@@ -74,6 +74,13 @@ fun TestApplicationEngine.post(
     return with(handleRequest(HttpMethod.Post, urlString, setup)) { response }
 }
 
+fun TestApplicationEngine.get(
+    urlString: String,
+    setup: TestApplicationRequest.() -> Unit = {}
+): TestApplicationResponse {
+    return with(handleRequest(HttpMethod.Get, urlString, setup)) { response }
+}
+
 fun TestApplicationEngine.put(
     urlString: String,
     setup: TestApplicationRequest.() -> Unit = {}

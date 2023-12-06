@@ -13,13 +13,11 @@ class CreateProductCommandHandler(
 ) : CommandHandler<CreateProductCommand> {
 
 
-    override fun handle(command: CreateProductCommand) {
-        CoroutineScope(Dispatchers.Default).launch {
-            productCreator.create(
-                id = ProductId(command.id),
-                name = ProductName(command.name),
-                price = ProductPrice(command.price)
-            )
-        }
+    override suspend fun handle(command: CreateProductCommand) {
+        productCreator.create(
+            id = ProductId(command.id),
+            name = ProductName(command.name),
+            price = ProductPrice(command.price)
+        )
     }
 }

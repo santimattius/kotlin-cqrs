@@ -1,5 +1,6 @@
 package com.santimattius.module.product.application
 
+import com.santimattius.module.product.application.search.ProductSearcher
 import com.santimattius.module.product.domain.ProductNotExists
 import com.santimattius.module.product.domain.ProductRepository
 import kotlinx.coroutines.runBlocking

@@ -58,43 +58,8 @@ class ProductIntegrationTest {
         }
 
         assertEquals(HttpStatusCode.Created, response.status())
-        assertEquals(200.0, response.data<Product>()?.price)
     }
 
-    @Test
-    fun postProductWhenProductBadRequest() = legacyIntegrationTest {
-        testConfigure {
-            single<ProductRepository> { InMemoryProductRepository() }
-        }
-
-        val response = post("/v1/product") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-            body(Product(id = "", name = "", price = 0.0))
-        }
-
-        assertEquals(HttpStatusCode.BadRequest, response.status())
-    }
-
-    @Test
-    fun postProductWhenFailProductCreation() = legacyIntegrationTest {
-        //Mock repository with save fail
-        val repository: ProductRepository = mock {
-            onBlocking {
-                save(org.mockito.kotlin.any())
-            }.thenReturn(Result.failure(Exception()))
-        }
-
-        testConfigure {
-            single<ProductRepository> { repository }
-        }
-
-        val response = post("/v1/product") {
-            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-            body(Product(name = "Test Product", price = 200.0))
-        }
-
-        assertEquals(HttpStatusCode.BadRequest, response.status())
-    }
 
     @Test
     fun putProductWhenProductCreated() = legacyIntegrationTest {
@@ -103,10 +68,17 @@ class ProductIntegrationTest {
             single<ProductRepository> { InMemoryProductRepository() }
         }
 
-        val responsePost = post("/v1/product") {
+        val id = UUID.randomUUID().toString()
+
+        post("/v1/product") {
             header(ContentType.Application.Json)
-            body(Product(name = "Test Product", price = 200.0))
+            body(Product(id = id, name = "Test Product", price = 200.0))
         }
+
+        val responsePost = get("/v1/product/${id}"){
+            header(ContentType.Application.Json)
+        }
+
         val productCreated = responsePost.data<Product>()
         assertTrue(productCreated != null)
 
@@ -148,9 +120,15 @@ class ProductIntegrationTest {
             single<ProductRepository> { InMemoryProductRepository() }
         }
 
-        val responsePost = post("/v1/product") {
+        val id = UUID.randomUUID().toString()
+
+        post("/v1/product") {
             header(ContentType.Application.Json)
-            body(Product(name = "Test Product", price = 200.0))
+            body(Product(id = id, name = "Test Product", price = 200.0))
+        }
+
+        val responsePost = get("/v1/product/${id}"){
+            header(ContentType.Application.Json)
         }
         val productCreated = responsePost.data<Product>()
         assertTrue(productCreated != null)

@@ -1,24 +1,25 @@
 package com.santimattius.module.product.infrastructure.controllers
 
 import com.santimattius.module.product.application.ProductCatalog
-import com.santimattius.module.product.application.ProductSearcher
-import com.santimattius.module.product.domain.ProductId
+import com.santimattius.module.product.application.search.ProductResponse
+import com.santimattius.module.product.application.search.ProductSearchQuery
+import com.santimattius.module.product.application.search.ProductSearcher
 import com.santimattius.module.product.infrastructure.Product
 import com.santimattius.module.product.infrastructure.asDTO
 import com.santimattius.module.product.infrastructure.asDTOs
-import io.ktor.http.HttpStatusCode
+import com.santimattius.module.shared.infrastructure.ApiController
+import io.ktor.http.*
 
 class ProductGetController(
-    private val productSearcher: ProductSearcher,
     private val productCatalog: ProductCatalog
-) {
+) : ApiController() {
 
     suspend fun get(id: String): Pair<HttpStatusCode, Product?> {
-        val result = productSearcher.search(
-            id = ProductId(id)
-        )
+        val result = runCatching<ProductResponse> {
+            ask(ProductSearchQuery(id))
+        }
         return result.fold(
-            onSuccess = { HttpStatusCode.OK to it.asDTO() },
+            onSuccess = { HttpStatusCode.OK to it.data.asDTO() },
             onFailure = { HttpStatusCode.BadRequest to null }
         )
     }

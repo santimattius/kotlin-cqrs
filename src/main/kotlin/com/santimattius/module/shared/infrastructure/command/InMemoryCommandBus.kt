@@ -13,8 +13,9 @@ class InMemoryCommandBus(
 ) : CommandBus, KoinComponent {
 
 
+    @Suppress("TooGenericExceptionCaught")
     @Throws(CommandHandlerExecutionError::class)
-    override fun dispatch(command: Command) {
+    override suspend fun dispatch(command: Command) {
         try {
             val commandHandlerClass = information.search(command.javaClass)
             val handler: CommandHandler<Command> = KoinJavaComponent.get(commandHandlerClass)

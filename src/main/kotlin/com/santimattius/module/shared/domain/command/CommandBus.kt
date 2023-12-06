@@ -5,5 +5,5 @@ import kotlin.jvm.Throws
 interface CommandBus {
 
     @Throws(CommandHandlerExecutionError::class)
-    fun dispatch(command: Command)
+    suspend fun dispatch(command: Command)
 }
