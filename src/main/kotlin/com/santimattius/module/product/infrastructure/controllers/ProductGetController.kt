@@ -3,7 +3,6 @@ package com.santimattius.module.product.infrastructure.controllers
 import com.santimattius.module.product.application.ProductCatalog
 import com.santimattius.module.product.application.search.ProductResponse
 import com.santimattius.module.product.application.search.ProductSearchQuery
-import com.santimattius.module.product.application.search.ProductSearcher
 import com.santimattius.module.product.infrastructure.Product
 import com.santimattius.module.product.infrastructure.asDTO
 import com.santimattius.module.product.infrastructure.asDTOs

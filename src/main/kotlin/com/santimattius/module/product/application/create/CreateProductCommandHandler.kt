@@ -4,9 +4,6 @@ import com.santimattius.module.product.domain.ProductId
 import com.santimattius.module.product.domain.ProductName
 import com.santimattius.module.product.domain.ProductPrice
 import com.santimattius.module.shared.domain.command.CommandHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class CreateProductCommandHandler(
     private val productCreator: ProductCreator,

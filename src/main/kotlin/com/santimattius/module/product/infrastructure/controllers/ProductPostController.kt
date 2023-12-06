@@ -2,7 +2,6 @@ package com.santimattius.module.product.infrastructure.controllers
 
 import com.santimattius.module.product.application.create.CreateProductCommand
 import com.santimattius.module.product.infrastructure.Product
-import com.santimattius.module.shared.domain.command.CommandBus
 import com.santimattius.module.shared.infrastructure.ApiController
 import io.ktor.http.*
 

@@ -4,12 +4,9 @@ import com.santimattius.module.product.domain.ProductRepository
 import com.santimattius.module.product.infrastructure.Product
 import com.santimattius.module.product.infrastructure.repositories.InMemoryProductRepository
 import com.santimattius.module.product.infrastructure.repositories.stubProductDto
-import io.ktor.client.request.get
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import org.mockito.kotlin.mock
-import java.util.UUID
+import io.ktor.client.request.*
+import io.ktor.http.*
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

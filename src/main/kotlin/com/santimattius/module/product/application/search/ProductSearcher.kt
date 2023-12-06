@@ -3,7 +3,7 @@ package com.santimattius.module.product.application.search
 import com.santimattius.module.product.domain.*
 
 class ProductSearcher(
-    private val repository: ProductRepository
+    repository: ProductRepository
 ) {
 
     private val productSearchService = ProductSearchService(repository)
