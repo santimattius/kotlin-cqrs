@@ -5,7 +5,7 @@
 Example project applying hexagonal architecture and CQRS in kotlin.
 
 <p align="center">
-  <img width="500" src="https://github.com/santimattius/kotlin-hexagonal-architecture/blob/master/images/arch_hexa.png?raw=true" alt="Layers"/>
+  <img width="500" src="https://github.com/santimattius/kotlin-cqrs/blob/master/images/cqrs_diagram.png?raw=true" alt="Layers"/>
 </p>
 
 ## Concepts
@@ -42,6 +42,10 @@ If we have a system with a high volume of traffic, we will be able to take advan
 Not having side-effects is very good for us to be able to search them.
 
 ## Layers in this project
+
+<p align="center">
+  <img width="500" src="https://github.com/santimattius/kotlin-cqrs/blob/master/images/arch_hexa.png?raw=true" alt="Layers"/>
+</p>
 
 **Domain**
 
